@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
@@ -11,43 +12,65 @@
       height: 100vh;
       background-color: #111;
     }
+
     img {
       width: 128px;
       height: 128px;
       image-rendering: pixelated;
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
     }
   </style>
 </head>
+
 <body>
   <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
 
   <script>
-    function updateClockFrame() {
+    window.addEventListener('load', function() {
+      const image = document.querySelector('img');
+      image.style.opacity = 1;
+    });
+
+    const image = document.getElementById('clockImage');
+
+    function getCurrentFrame() {
       const now = new Date();
       const totalMinutes = now.getHours() * 60 + now.getMinutes();
-
-      // Convert time to fraction of day (0 to 1)
       const fraction = totalMinutes / (24 * 60);
-
-      // Get raw frame (0–63)
       let frame = Math.floor(fraction * 64);
+      frame = (frame + 32) % 64; // shift noon to frame_0
+      return frame;
+    }
 
-      // Adjust so frame 0 = NOON, and frame 32 = MIDNIGHT
-      frame = (frame + 32) % 64;
+    function animateToFrame(targetFrame) {
+      let currentFrame = 0;
 
-      // Format frame number
+      const interval = setInterval(() => {
+        const frameStr = String(currentFrame).padStart(2, '0');
+        image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+
+        if (currentFrame === targetFrame) {
+          clearInterval(interval);
+        } else {
+          currentFrame = (currentFrame + 1) % 64;
+        }
+      }, 40); // Adjust speed
+    }
+
+    function updateClockFrame() {
+      const frame = getCurrentFrame();
       const frameStr = String(frame).padStart(2, '0');
-
-      // Update the image
-      const image = document.getElementById('clockImage');
       image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
     }
 
-    // Initial update
-    updateClockFrame();
+    // Start animation to current time
+    const targetFrame = getCurrentFrame();
+    animateToFrame(targetFrame);
 
-    // Update every minute
+    // Then update normally every minute
     setInterval(updateClockFrame, 60 * 1000);
   </script>
 </body>
+
 </html>
