@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Clock</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+    }
+    img {
+      width: 128px;
+      height: 128px;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+  <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+
+  <script>
+    function updateClockFrame() {
+      const now = new Date();
+      const totalMinutes = now.getHours() * 60 + now.getMinutes();
+
+      // Convert time to fraction of day (0 to 1)
+      const fraction = totalMinutes / (24 * 60);
+
+      // Get raw frame (0–63)
+      let frame = Math.floor(fraction * 64);
+
+      // Adjust so frame 0 = NOON, and frame 32 = MIDNIGHT
+      frame = (frame + 32) % 64;
+
+      // Format frame number
+      const frameStr = String(frame).padStart(2, '0');
+
+      // Update the image
+      const image = document.getElementById('clockImage');
+      image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+    }
+
+    // Initial update
+    updateClockFrame();
+
+    // Update every minute
+    setInterval(updateClockFrame, 60 * 1000);
+  </script>
+</body>
+</html>
