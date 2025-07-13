@@ -44,18 +44,29 @@
     }
 
     function animateToFrame(targetFrame) {
-      let currentFrame = 0;
+      const totalSteps = targetFrame; // steps = how many frames to animate through
+      const duration = 1000; // total animation time in ms (you can tweak this)
+      const startTime = performance.now();
 
-      const interval = setInterval(() => {
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const t = Math.min(elapsed / duration, 1); // progress 0 to 1
+        const easedT = easeOutCubic(t);
+        const currentFrame = Math.floor(easedT * totalSteps);
+
         const frameStr = String(currentFrame).padStart(2, '0');
         image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
 
-        if (currentFrame === targetFrame) {
-          clearInterval(interval);
-        } else {
-          currentFrame = (currentFrame + 1) % 64;
+        if (t < 1) {
+          requestAnimationFrame(animate);
         }
-      }, 40); // Adjust speed
+      }
+
+      requestAnimationFrame(animate);
     }
 
     function updateClockFrame() {
