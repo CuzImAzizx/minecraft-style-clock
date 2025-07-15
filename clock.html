@@ -1,33 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #111;
-    }
-
-    #clockImage {
-      width: 128px;
-      height: 128px;
+    .clockImages {
+      width: 25vh;
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
   </style>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 
 <body>
-  <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+  <!-- START NAV -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Minecraft Clock</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/clock.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/full-screen.html">Full Screen Mode</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAV -->
+<div class="container text-center">
+  <h3 class="mt-5">Asia/Riyadh</h3>
+  <img class="clockImages" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+  <div id="txt" style="font-size: x-large; font-family: Orbitron"></div>
+</div>
 
   <script>
     window.addEventListener('load', function() {
+      startTime()
       const image = document.querySelector('img');
       image.style.opacity = 1;
 
@@ -42,7 +63,7 @@
 
       function animateToFrame(targetFrame) {
         const totalSteps = targetFrame; // steps = how many frames to animate through
-        const duration = 1000; // total animation time in ms (you can tweak this)
+        const duration = 1200; // total animation time in ms (you can tweak this)
         const startTime = performance.now();
 
         function easeOutBack(x) {
@@ -87,6 +108,26 @@
 
     const image = document.getElementById('clockImage');
   </script>
+  <script>
+    function startTime() {
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+      setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i
+      }; // add zero in front of numbers < 10
+      return i;
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 
 </html>
