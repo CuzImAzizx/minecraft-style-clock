@@ -6,7 +6,7 @@
   <title>Minecraft Clock</title>
   <style>
     .clockImages {
-      width: 25vh;
+      width: 20vw;
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
@@ -40,20 +40,24 @@
     </div>
   </nav>
   <!-- END NAV -->
-<div class="container text-center">
-  <h3 class="mt-5">Asia/Riyadh</h3>
-  <img class="clockImages" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
-  <div id="txt" style="font-size: x-large; font-family: Orbitron"></div>
-</div>
+  <div class="container text-center">
+    <h3 class="mt-5" style="margin-bottom: 10px;">Asia/Riyadh</h3>
+    <img class="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+    <div class="clockTime" style="font-size: x-large; font-family: Orbitron"></div>
+  </div>
 
   <script>
-    window.addEventListener('load', function() {
-      startTime()
-      const image = document.querySelector('img');
-      image.style.opacity = 1;
+    class MinecraftClock {
+      constructor(container, timezone) {
+        this.container = container;
+        this.timezone = timezone;
+        this.image = container.querySelector('.clockImage');
+        this.timeText = container.querySelector('.clockTime');
 
-      function getCurrentFrame() {
-        const now = new Date();
+        this.init();
+      }
+
+      getCurrentFrame(now) {
         const totalMinutes = now.getHours() * 60 + now.getMinutes();
         const fraction = totalMinutes / (24 * 60);
         let frame = Math.floor(fraction * 64);
@@ -61,72 +65,74 @@
         return frame;
       }
 
-      function animateToFrame(targetFrame) {
-        const totalSteps = targetFrame; // steps = how many frames to animate through
-        const duration = 1200; // total animation time in ms (you can tweak this)
+      animateToFrame(targetFrame) {
+        const totalSteps = targetFrame;
+        const duration = 1200;
         const startTime = performance.now();
 
-        function easeOutBack(x) {
+        const easeOutBack = (x) => {
           const c1 = 1.70158;
           const c3 = c1 + 1;
-
           return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
-        }
+        };
 
-        function animate(currentTime) {
+        const animate = (currentTime) => {
           const elapsed = currentTime - startTime;
-          const t = Math.min(elapsed / duration, 1); // progress 0 to 1
+          const t = Math.min(elapsed / duration, 1);
           const easedT = easeOutBack(t);
           const currentFrame = Math.floor(easedT * totalSteps);
-
           const frameStr = String(currentFrame).padStart(2, '0');
-          image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+          this.image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
 
           if (t < 1) {
             requestAnimationFrame(animate);
           }
-        }
+        };
 
         requestAnimationFrame(animate);
       }
 
-      function updateClockFrame() {
-        const frame = getCurrentFrame();
+      updateClockFrame() {
+        const now = new Date().toLocaleString("en-US", {
+          timeZone: this.timezone
+        });
+        const date = new Date(now);
+        const frame = this.getCurrentFrame(date);
         const frameStr = String(frame).padStart(2, '0');
-        image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+        this.image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+
+        const h = date.getHours().toString().padStart(2, '0');
+        const m = date.getMinutes().toString().padStart(2, '0');
+        const s = date.getSeconds().toString().padStart(2, '0');
+        this.timeText.innerText = `${h}:${m}:${s}`;
       }
 
+      init() {
+        const now = new Date().toLocaleString("en-US", {
+          timeZone: this.timezone
+        });
+        const date = new Date(now);
+        const targetFrame = this.getCurrentFrame(date);
+        this.animateToFrame(targetFrame);
 
-      // Start animation to current time
-      const targetFrame = getCurrentFrame();
-      animateToFrame(targetFrame);
-
-      // Then update normally every minute
-      setInterval(updateClockFrame, 60 * 1000);
-
-    });
-
-    const image = document.getElementById('clockImage');
+        setInterval(() => this.updateClockFrame(), 1000);
+      }
+    }
   </script>
+
   <script>
-    function startTime() {
-      const today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      let s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
-      setTimeout(startTime, 1000);
-    }
+    window.addEventListener('load', () => {
+      const containers = document.querySelectorAll('.container');
 
-    function checkTime(i) {
-      if (i < 10) {
-        i = "0" + i
-      }; // add zero in front of numbers < 10
-      return i;
-    }
+      const timezones = ['Asia/Riyadh', 'Europe/London'];
+
+      containers.forEach((container, index) => {
+        new MinecraftClock(container, timezones[index]);
+      });
+    });
   </script>
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 
