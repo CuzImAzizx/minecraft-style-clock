@@ -107,7 +107,30 @@
           const t = Math.min(elapsed / duration, 1);
           const easedT = easeOutBack(t);
           const currentFrame = Math.floor(easedT * totalSteps);
-          const frameStr = String(currentFrame).padStart(2, '0');
+          let frameStr = String(currentFrame).padStart(2, '0');
+          // Not so proud of this
+          if(frameStr > 63){
+            switch (Number(frameStr)){
+              case 64:
+                frameStr = "00";
+                break;
+              case 65:
+                frameStr = "01";
+                break;
+              case 66:
+                frameStr = "02";
+                break;
+              case 67:
+                frameStr = "03";
+                break;
+              case 68:
+                frameStr = "04";
+                break;
+              case 69:
+                frameStr = "05";
+                break;
+            }
+          }
           this.image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
 
           if (t < 1) {
