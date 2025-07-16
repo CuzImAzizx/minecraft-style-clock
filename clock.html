@@ -184,8 +184,9 @@
   <script>
     window.addEventListener('load', () => {
       const containers = document.querySelectorAll('.clocks');
-
-      const timezones = ['Asia/Riyadh', 'Europe/London', 'Asia/Tokyo', 'America/New_York'];
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      let timezones = [`${userTimezone}`];
+      timezones.push('Europe/London', 'Asia/Tokyo', 'America/New_York');
 
       containers.forEach((container, index) => {
         new MinecraftClock(container, timezones[index]);
