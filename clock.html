@@ -44,7 +44,7 @@
   </nav>
   <!-- END NAV -->
   <div class="container text-center clocks">
-    <h3 class="mt-5" style="margin-bottom: 10px;">Asia/Riyadh</h3>
+    <h3 class="mt-5" style="margin-bottom: 10px;" id="mainClockTitle">Main Clock</h3>
     <img class="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
     <div class="clockTime" style="font-size: x-large; font-family: Orbitron">00:00:00</div>
   </div>
@@ -184,8 +184,10 @@
   <script>
     window.addEventListener('load', () => {
       const containers = document.querySelectorAll('.clocks');
+      
       const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       let timezones = [`${userTimezone}`];
+      document.getElementById("mainClockTitle").innerHTML = `${userTimezone}`
       timezones.push('Europe/London', 'Asia/Tokyo', 'America/New_York');
 
       containers.forEach((container, index) => {

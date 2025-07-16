@@ -64,7 +64,9 @@
       const image = document.getElementById('clockImage');
       const button = document.getElementById('generateButton');
       const timeInput = document.getElementById('enteredTime');
-      function getFrameFromTime(hours, minutes) {
+
+      function getFrameFromTime(timeInput) {
+        const [hours, minutes] = timeInput.split(':').map(Number);
         const totalMinutes = hours * 60 + minutes;
         const fraction = totalMinutes / (24 * 60);
         let frame = Math.floor(fraction * 64);
@@ -74,11 +76,9 @@
 
       button.addEventListener('click', () => {
         const timeValue = timeInput.value;
-        console.log(timeValue);
         if (!timeValue) {
-            const message = document.getElementById("errorNoInput")
-            message.style.display = "block";
-          //alert('Please enter a time!');
+          const message = document.getElementById("errorNoInput")
+          message.style.display = "block";
           return;
         }
         const message = document.getElementById("errorNoInput")
@@ -93,9 +93,38 @@
           return;
         }
 
-        const frame = getFrameFromTime(hours, minutes);
-        const frameStr = String(frame).padStart(2, '0');
-        image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+      function animateToFrame(targetFrame) {
+        const totalSteps = targetFrame; // steps = how many frames to animate through
+        const duration = 1000; // total animation time in ms (you can tweak this)
+        const startTime = performance.now();
+
+        function easeOutBack(x) {
+          const c1 = 1.70158;
+          const c3 = c1 + 1;
+
+          return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+        }
+
+        function animate(currentTime) {
+          const elapsed = currentTime - startTime;
+          const t = Math.min(elapsed / duration, 1); // progress 0 to 1
+          const easedT = easeOutBack(t);
+          const currentFrame = Math.floor(easedT * totalSteps);
+
+          const frameStr = String(currentFrame).padStart(2, '0');
+          image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+
+          if (t < 1) {
+            requestAnimationFrame(animate);
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+        // Start animation to current time
+      const targetFrame = getFrameFromTime(timeInput.value);
+      animateToFrame(targetFrame);
+
       });
     });
   </script>
