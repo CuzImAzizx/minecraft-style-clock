@@ -6,25 +6,66 @@
   <title>Minecraft Clock</title>
   <style>
     body {
-      display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
     #clockImage {
-      width: 50%;
+      margin: 5%;
+      width: 90%;
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
   </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    @font-face {
+      font-family: 'MinecraftRegular';
+      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+    }
+
+    body {
+      font-family: 'MinecraftRegular', sans-serif;
+    }
+  </style>
 
 </head>
 
 <body>
-  <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Minecraft Clock</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="full-screen.html">Full Screen Mode</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cache-assets.html">Cache Assets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container text-center clocks">
+    <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+  </div>
+
 
   <script>
     window.addEventListener('load', function() {
