@@ -35,7 +35,7 @@
           <li class="nav-item">
             <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
           </li>
-                    <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="cache-assets.html">Cache Assets</a>
           </li>
           <li class="nav-item">
@@ -51,17 +51,32 @@
     <h1 class="mt-5">Cache Assets</h1>
     <p class="mt-2">To ensure smooth animation, all frames should be cached.<br>This will display all frames at once so your browser can cache them and ensures smooth animation</p>
     <br>
-    <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
-    <br>
-    <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
-    <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-    </div>
-    <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
-      All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
-    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h3 class="mt-2">Frame caching</h3>
+          <p class="mt-2">Here you can start the caching process</p>
+          <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <br>
+          <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
+          <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+          </div>
+          <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
+            All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+          </div>
 
-    <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
+          <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
+        </div>
+        <div class="col-sm">
+          <h3 class="mt-2">Animation testing</h3>
+          <p class="mt-2">Here you can test how smooth is the animation</p>
+          <img id="clockImageAnimation" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <br>
+          <button type="button" id="playButton" class="btn btn-primary mt-3">Play animation</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
@@ -80,7 +95,7 @@
       alertSuccess.style.display = "none"
       let i = 0;
 
-      function updateBar(currentFrame){
+      function updateBar(currentFrame) {
         const mappedValue = (currentFrame / 63) * 100;
         progressBar.style.width = `${mappedValue}%`;
       }
@@ -106,6 +121,105 @@
       updateFrame(); // Start the frame update
     });
   </script>
+
+
+  <script>
+    window.addEventListener('load', () => {
+      const image = document.getElementById('clockImageAnimation');
+      const button = document.getElementById('playButton');
+
+      function getFrameFromTime(timeInput) {
+        const [hours, minutes] = timeInput.split(':').map(Number);
+        const totalMinutes = hours * 60 + minutes;
+        const fraction = totalMinutes / (24 * 60);
+        let frame = Math.floor(fraction * 64);
+        frame = (frame + 32) % 64; // shift noon to frame_0
+        return frame;
+      }
+
+      function formatMinutesToHHMM(totalMinutes) {
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        const formattedHours = String(hours).padStart(2, '0');
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        return `${formattedHours}:${formattedMinutes}`;
+      }
+
+
+      button.addEventListener('click', () => {
+        const timeValue = "11:59";
+        if (!timeValue) {
+          const message = document.getElementById("errorNoInput")
+          message.style.display = "block";
+          return;
+        }
+        const [hoursStr, minutesStr] = timeValue.split(':');
+        const hours = parseInt(hoursStr);
+        const minutes = parseInt(minutesStr);
+
+        if (isNaN(hours) || isNaN(minutes)) {
+          alert('Invalid time format!');
+          return;
+        }
+
+        function animateToFrame(targetFrame) {
+          const totalSteps = targetFrame; // steps = how many frames to animate through
+          const duration = 1200; // total animation time in ms (you can tweak this)
+          const startTime = performance.now();
+
+          function easeOutBack(x) {
+            const c1 = 1.70158;
+            const c3 = c1 + 1;
+
+            return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+          }
+
+          function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const t = Math.min(elapsed / duration, 1); // progress 0 to 1
+            const easedT = easeOutBack(t);
+            const currentFrame = Math.floor(easedT * totalSteps);
+            let frameStr = String(currentFrame).padStart(2, '0');
+            if (frameStr > 63) {
+              switch (Number(frameStr)) {
+                case 64:
+                  frameStr = "00";
+                  break;
+                case 65:
+                  frameStr = "01";
+                  break;
+                case 66:
+                  frameStr = "02";
+                  break;
+                case 67:
+                  frameStr = "03";
+                  break;
+                case 68:
+                  frameStr = "04";
+                  break;
+                case 69:
+                  frameStr = "05";
+                  break;
+              }
+            }
+            image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+
+            if (t < 1) {
+              requestAnimationFrame(animate);
+            }
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        // Start animation to current time
+        const targetFrame = getFrameFromTime("11:59");
+        animateToFrame(targetFrame);
+
+      });
+    });
+  </script>
+
 
 </body>
 
