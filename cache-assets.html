@@ -35,6 +35,9 @@
           <li class="nav-item">
             <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
           </li>
+                    <li class="nav-item">
+            <a class="nav-link" href="cache-assets.html">Cache Assets</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
           </li>
@@ -50,7 +53,7 @@
     <br>
     <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
     <br>
-    <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 63</label>
+    <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
     <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
       <div class="progress-bar" id="progressBar" style="width: 0%"></div>
     </div>
@@ -91,13 +94,13 @@
           updateBar(i);
           progressLable.style.display = "block";
           progressLableNumber.innerText = i;
-          setTimeout(updateFrame, 50);
+          setTimeout(updateFrame, 300);
         } else {
           // Re-enable the button after the loop
           button.disabled = false;
-          updateBar(0)
+          //updateBar(0)
           alertSuccess.style.display = "block";
-          progressLable.style.display = "none";
+          //progressLable.style.display = "none";
         }
       };
       updateFrame(); // Start the frame update
