@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Clock</title>
+  <style>
+    .clockImage {
+      width: 15vw;
+      image-rendering: pixelated;
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+    }
+  </style>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+  <!-- START NAV -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Minecraft Clock</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAV -->
+
+  <div class="container text-center clocks">
+    <h1 class="mt-5">Cache Assets</h1>
+    <p class="mt-2">To ensure smooth animation, all frames should be cached.<br>This will display all frames at once so your browser can cache them and ensures smooth animation</p>
+    <br>
+    <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+    <br>
+    <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 63</label>
+    <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    </div>
+    <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
+      All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+    </div>
+
+    <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+  <script>
+    const image = document.getElementById('clockImage');
+    const button = document.getElementById('start');
+    const progressBar = document.getElementById('progressBar');
+    const alertSuccess = document.getElementById('alertSuccess');
+    const progressLable = document.getElementById('progressLable');
+    const progressLableNumber = document.getElementById('progressLableNumber');
+
+    button.addEventListener('click', () => {
+      // Disable the button to prevent multiple clicks
+      button.disabled = true;
+      alertSuccess.style.display = "none"
+      let i = 0;
+
+      function updateBar(currentFrame){
+        const mappedValue = (currentFrame / 63) * 100;
+        progressBar.style.width = `${mappedValue}%`;
+      }
+
+      const updateFrame = () => {
+        if (i < 64) {
+          const frameStr = String(i).padStart(2, '0');
+          image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+          i++;
+          // Pause for 10 ms
+          updateBar(i);
+          progressLable.style.display = "block";
+          progressLableNumber.innerText = i;
+          setTimeout(updateFrame, 50);
+        } else {
+          // Re-enable the button after the loop
+          button.disabled = false;
+          updateBar(0)
+          alertSuccess.style.display = "block";
+          progressLable.style.display = "none";
+        }
+      };
+      updateFrame(); // Start the frame update
+    });
+  </script>
+
+</body>
+
+</html>
