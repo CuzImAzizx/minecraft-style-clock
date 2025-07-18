@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Clock</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+  <style>
+    .clockImage {
+      width: 15vw;
+      image-rendering: pixelated;
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+    }
+  </style>
+  <style>
+    @font-face {
+      font-family: 'MinecraftRegular';
+      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+    }
+
+    body {
+      font-family: 'MinecraftRegular', sans-serif;
+    }
+  </style>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <!-- START NAV -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Minecraft Clock</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cache-assets.html">Cache Assets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <!-- END NAV -->
+  <div class="container text-center clocks">
+    <h1 id="minecraft-style-clock">Minecraft Style Clock</h1>
+    <p><img src="banner.gif" alt="An animated banner showing a digital clock synced with the Minecraft clock"></p>
+    <p>A website that shows time, but in a Minecraft style :3</p>
+    <p>I believe this project is self-explanatory; it's just a website that displays the time as a Minecraft clock.</p>
+    <p>This project started as a simple experiment in selecting the correct clock frame based on time…<br>Then it got animations…<br>Then timezone support…<br>Until it became a fun little website.</p>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h2 id="features">Features</h2>
+          <ul style="text-align: left;">
+            <li><strong>Dynamic Clock</strong>: Shows the Minecraft clock based on your system&#39;s time!</li>
+            <li><strong>Fun Animations</strong>: Displays clock animations similar to those in the game.</li>
+            <li><strong>Clock Generation</strong>: Enter your time to generate a synced Minecraft clock frame.</li>
+            <li><strong>Lightweight &amp; Fast</strong>: A fully static website.</li>
+          </ul>
+        </div>
+        <div class="col-sm">
+          <h2 id="technologies-used">Technologies Used</h2>
+
+          <div style="text-align: left;">
+            <blockquote>
+              <p><em>&quot;An idiot admires complexity; a genius admires simplicity.&quot;</em> - Terry A. Davis</p>
+            </blockquote>
+            <p>This is a pure frontend project that displays a Minecraft-style clock synced with real time. </p>
+            <p>No frameworks, no libraries, just pure <strong>HTML</strong>, embedded <strong>JavaScript</strong>, and <strong>CSS</strong>.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="mt-2">GitHub Repository</h1>
+    <p>check the <a href="https://github.com/CuzImAzizx/minecraft-style-clock">GitHib Repository</a> for latest updates!</p>
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+
+</html>
