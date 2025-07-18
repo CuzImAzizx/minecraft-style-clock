@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
+  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
   <style>
-    .clockImage {
-      width: 15vw;
-      image-rendering: pixelated;
+    #clockImage {
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+    }
+
+    #clockImageAnimation {
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
@@ -100,37 +104,42 @@
     const progressLable = document.getElementById('progressLable');
     const progressLableNumber = document.getElementById('progressLableNumber');
 
-    button.addEventListener('click', () => {
-      // Disable the button to prevent multiple clicks
-      button.disabled = true;
-      alertSuccess.style.display = "none"
-      let i = 0;
+    window.addEventListener('load', () => {
+      image.style.opacity = 1;
 
-      function updateBar(currentFrame) {
-        const mappedValue = (currentFrame / 63) * 100;
-        progressBar.style.width = `${mappedValue}%`;
-      }
+      button.addEventListener('click', () => {
+        // Disable the button to prevent multiple clicks
+        button.disabled = true;
+        alertSuccess.style.display = "none"
+        let i = 0;
 
-      const updateFrame = () => {
-        if (i < 64) {
-          const frameStr = String(i).padStart(2, '0');
-          image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
-          i++;
-          // Pause for 10 ms
-          updateBar(i);
-          progressLable.style.display = "block";
-          progressLableNumber.innerText = i;
-          setTimeout(updateFrame, 300);
-        } else {
-          // Re-enable the button after the loop
-          button.disabled = false;
-          //updateBar(0)
-          alertSuccess.style.display = "block";
-          //progressLable.style.display = "none";
+        function updateBar(currentFrame) {
+          const mappedValue = (currentFrame / 63) * 100;
+          progressBar.style.width = `${mappedValue}%`;
         }
-      };
-      updateFrame(); // Start the frame update
-    });
+
+        const updateFrame = () => {
+          if (i < 64) {
+            const frameStr = String(i).padStart(2, '0');
+            image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+            i++;
+            // Pause for 10 ms
+            updateBar(i);
+            progressLable.style.display = "block";
+            progressLableNumber.innerText = i;
+            setTimeout(updateFrame, 300);
+          } else {
+            // Re-enable the button after the loop
+            button.disabled = false;
+            //updateBar(0)
+            alertSuccess.style.display = "block";
+            //progressLable.style.display = "none";
+          }
+        };
+        updateFrame(); // Start the frame update
+      });
+
+    })
   </script>
 
 
@@ -138,6 +147,7 @@
     window.addEventListener('load', () => {
       const image = document.getElementById('clockImageAnimation');
       const button = document.getElementById('playButton');
+      image.style.opacity = 1;
 
       function getFrameFromTime(timeInput) {
         const [hours, minutes] = timeInput.split(':').map(Number);

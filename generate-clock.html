@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
+  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
   <style>
-    .clockImage {
-      width: 15vw;
-      image-rendering: pixelated;
+    #clockImage {
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
@@ -69,7 +68,7 @@
       Please enter a time to generate a clock
     </div>
     <br>
-    <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+    <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
@@ -80,6 +79,7 @@
       const button = document.getElementById('generateButton');
       const timeInput = document.getElementById('enteredTime');
       const timeInputRange = document.getElementById('enteredTimeRange');
+      image.style.opacity = 1;
 
       function getFrameFromTime(timeInput) {
         const [hours, minutes] = timeInput.split(':').map(Number);
