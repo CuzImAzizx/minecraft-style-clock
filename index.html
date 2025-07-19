@@ -92,6 +92,60 @@
       </div>
     </div>
   </div>
+  <div class="container text-center clocks mt-5" style="width: 50%;">
+    <div class="card" >
+      <div class="card-body">
+        <h2 class="mt-2 text-center">Controls</h2>
+        <p class="mt-2">Here you can customize things.</p>
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col" >
+              <h5>Clock System</h5>
+              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
+                <input class="form-check-input" style="margin-right: 10px;" type="radio" name="radioDefault" id="24hoursRadio" checked>
+                <label class="form-check-label" for="24hoursRadio">
+                  24 Hour System
+                </label>
+              </div>
+              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
+                <input class="form-check-input" style="margin-right: 10px;" type="radio" name="radioDefault" id="12hoursRadio">
+                <label class="form-check-label" for="12hoursRadio">
+                  12 Hour System
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <h5>Clock System</h5>
+              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
+                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="hoursCheck" checked>
+                <label class="form-check-label" for="hoursCheck">
+                  Show Hours
+                </label>
+              </div>
+              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
+                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="minutesCheck" checked>
+                <label class="form-check-label" for="minutesCheck">
+                  Show Minutes
+                </label>
+              </div>
+              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
+                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="secondsCheck" checked>
+                <label class="form-check-label" for="secondsCheck">
+                  Show Seconds
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning mt-2" role="alert">
+  These do not do anything, yet. Working on it.
+</div>
+
+      </div>
+    </div>
+
+  </div>
 
   <script>
     window.onload = () => {
