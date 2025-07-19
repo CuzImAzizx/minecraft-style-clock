@@ -93,13 +93,13 @@
     </div>
   </div>
   <div class="container text-center clocks mt-5" style="width: 50%;">
-    <div class="card" >
+    <div class="card">
       <div class="card-body">
         <h2 class="mt-2 text-center">Controls</h2>
         <p class="mt-2">Here you can customize things.</p>
         <div class="container mt-4">
           <div class="row">
-            <div class="col" >
+            <div class="col">
               <h5>Clock System</h5>
               <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
                 <input class="form-check-input" style="margin-right: 10px;" type="radio" name="radioDefault" id="24hoursRadio" checked>
@@ -138,10 +138,6 @@
             </div>
           </div>
         </div>
-        <div class="alert alert-warning mt-2" role="alert">
-  These do not do anything, yet. Working on it.
-</div>
-
       </div>
     </div>
 
@@ -256,7 +252,21 @@
         const h = date.getHours().toString().padStart(2, '0');
         const m = date.getMinutes().toString().padStart(2, '0');
         const s = date.getSeconds().toString().padStart(2, '0');
-        this.timeText.innerText = `${h}:${m}:${s}`;
+
+        const radio24hours = document.getElementById("24hoursRadio")
+        const showHours = document.getElementById("hoursCheck");
+        const showMinutes = document.getElementById("minutesCheck");
+        const showSeconds = document.getElementById("secondsCheck");
+
+        const time = formatDynamicTime(h, m, s, showHours.checked, showMinutes.checked, showSeconds.checked);
+
+        if (radio24hours.checked) {
+          this.timeText.innerText = time;
+        } else {
+          const newTime = convert24To12Hour(`${h}:${m}:${s}`)
+          const filteredTime = format12HourTimeDisplay(newTime, showHours.checked, showMinutes.checked, showSeconds.checked)
+          this.timeText.innerText = filteredTime;
+        }
       }
 
       init() {
@@ -288,6 +298,120 @@
         new MinecraftClock(container, timezones[index]);
       });
     });
+
+    function convert24To12Hour(time24hrString) {
+      // 1. Input Validation: Let's be sure we're getting what we expect, darling.
+      const timeRegex = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/; // Regex for hh:mm:ss
+      const match = time24hrString.match(timeRegex);
+
+      if (!match) {
+        return null; // Return null for invalid input
+      }
+
+      // 2. Parse the time components: Splitting it up nicely.
+      let hours = parseInt(match[1], 10); // The '10' ensures base-10 parsing
+      const minutes = parseInt(match[2], 10);
+      const seconds = parseInt(match[3], 10);
+
+      // 3. Determine AM/PM and convert hours: This is where the magic happens!
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+
+      // Convert hours from 24-hour to 12-hour format
+      if (hours === 0) {
+        hours = 12; // 00:00:00 (midnight) becomes 12 AM
+      } else if (hours > 12) {
+        hours -= 12; // e.g., 13:00:00 becomes 01:00:00 PM
+      }
+      // If hours is 1-11, it stays as is for AM.
+      // If hours is 12, it stays 12 for PM.
+
+      // 4. Format for consistency: Ensuring two digits for everything, nice and neat.
+      const formattedHours = String(hours).padStart(2, '0');
+      const formattedMinutes = String(minutes).padStart(2, '0');
+      const formattedSeconds = String(seconds).padStart(2, '0');
+
+      // 5. Assemble the final string: Putting it all together!
+      return `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
+    }
+
+    function formatDynamicTime(hours, minutes, seconds, showHours, showMinutes, showSeconds, ampm = '') {
+      const timeParts = [];
+
+      // 1. Prepare and add hours (if checked):
+      // We'll use padStart here to ensure '09' instead of '9', etc.
+      // If you're using the 12-hour conversion function result, 'hours' here
+      // should already be the 12-hour value (1-12) and padded.
+      if (showHours) {
+        // Ensure hours are padded with a leading zero if they are single digit
+        const formattedHours = String(hours).padStart(2, '0');
+        timeParts.push(formattedHours);
+      }
+
+      // 2. Prepare and add minutes (if checked):
+      if (showMinutes) {
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        timeParts.push(formattedMinutes);
+      }
+
+      // 3. Prepare and add seconds (if checked):
+      if (showSeconds) {
+        const formattedSeconds = String(seconds).padStart(2, '0');
+        timeParts.push(formattedSeconds);
+      }
+
+      // 4. Join the parts with a colon and add AM/PM if available
+      let result = timeParts.join(':');
+
+      if (ampm) {
+        result += ` ${ampm}`; // Add a space before AM/PM
+      }
+
+      return result;
+    }
+
+    function format12HourTimeDisplay(time12hrString, showHours, showMinutes, showSeconds) {
+      // 1. Validate and parse the input string.
+      // Matches "HH:MM:SS AM/PM" or "H:M:S AM/PM" (flexible on leading zeros for parsing)
+      const timeRegex = /^(\d{1,2}):(\d{2}):(\d{2})\s(AM|PM)$/i;
+      const match = time12hrString.match(timeRegex);
+
+      if (!match) {
+        console.error("Invalid 12-hour time format. Expected 'HH:MM:SS AM/PM'.");
+        return null;
+      }
+
+      const hours = match[1]; // Keep as string, already formatted if from previous function
+      const minutes = match[2]; // Keep as string
+      const seconds = match[3]; // Keep as string
+      const ampm = match[4].toUpperCase(); // Ensure uppercase AM/PM
+
+      // 2. Build the time parts array conditionally.
+      const timeParts = [];
+      if (showHours) {
+        timeParts.push(hours);
+      }
+      if (showMinutes) {
+        timeParts.push(minutes);
+      }
+      if (showSeconds) {
+        timeParts.push(seconds);
+      }
+
+      // 3. Join parts and append AM/PM.
+      let formattedTime = timeParts.join(':');
+
+      if (formattedTime) { // Only append AM/PM if there's actually a time part
+        formattedTime += ` ${ampm}`;
+      } else {
+        // If no time components were selected, but AM/PM was present in input
+        // This case might mean an empty string or just the AM/PM if that's desired.
+        // For now, return empty string if no parts are selected.
+        formattedTime = ""; // Or return ampm if you prefer ("AM", "PM")
+      }
+
+
+      return formattedTime;
+    }
   </script>
 
 
