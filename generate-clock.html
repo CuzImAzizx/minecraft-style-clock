@@ -52,6 +52,11 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
         </ul>
+        <div class="form-check form-switch ms-auto">
+          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" id="switchCheckChecked" checked>
+          <label class="form-check-label" for="switchCheckChecked">Dark Mode</label>
+        </div>
+
       </div>
     </div>
   </nav>
@@ -190,6 +195,27 @@
 
       });
     });
+  </script>
+  <script>
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('bsTheme') || 'dark';
+      document.documentElement.setAttribute('data-bs-theme', savedTheme);
+      const themeToggle = document.getElementById('themeToggle');
+      //themeToggle.checked = false;
+      if (savedTheme == "dark") {
+        themeToggle.checked = true
+      } else {
+        themeToggle.checked = false
+      }
+    };
+
+    // Save theme to localStorage on toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-bs-theme', newTheme);
+      localStorage.setItem('bsTheme', newTheme);
+    }
   </script>
 
 </body>
