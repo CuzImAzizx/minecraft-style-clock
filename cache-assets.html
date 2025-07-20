@@ -70,30 +70,66 @@
   <div class="container text-center clocks">
     <h1 class="mt-5">Cache Assets</h1>
     <p class="mt-2">To ensure smooth animation, all frames should be cached.<br>This will display all frames at once so your browser can cache them and ensures smooth animation</p>
-    <br>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <h3 class="mt-2">Frame caching</h3>
-          <p class="mt-2">Here you can start the caching process</p>
-          <img id="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
-          <br>
-          <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
-          <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+    <div class="card mt-4 mb-4">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <h2 class="mt-4">Clock Caching</h2>
+            <p>Cache and test the clock frames here</p>
+            <div class="col-sm">
+              <h3 class="mt-2">Frame caching</h3>
+              <p class="mt-2">Here you can start the caching process</p>
+              <img id="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+              <br>
+              <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
+              <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+              </div>
+              <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
+                All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+              </div>
+              <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
+            </div>
+            <div class="col-sm">
+              <h3 class="mt-2">Animation testing</h3>
+              <p class="mt-2">Here you can test how smooth the animation is</p>
+              <img id="clockImageAnimation" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+              <br>
+              <button type="button" id="playButton" class="btn btn-primary mt-3">Play animation</button>
+            </div>
           </div>
-          <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
-            All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
-          </div>
-
-          <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
         </div>
-        <div class="col-sm">
-          <h3 class="mt-2">Animation testing</h3>
-          <p class="mt-2">Here you can test how smooth the animation is</p>
-          <img id="clockImageAnimation" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
-          <br>
-          <button type="button" id="playButton" class="btn btn-primary mt-3">Play animation</button>
+      </div>
+    </div>
+
+    <div class="card mt-4 mb-4">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <h2 class="mt-4">Moon Caching</h2>
+            <p>Cache and test the Moon frames here</p>
+            <div class="col-sm">
+              <h3 class="mt-2">Frame caching</h3>
+              <p class="mt-2">Here you can start the caching process</p>
+              <img id="moonImage" style="margin-bottom: 10px;" src="assets/moon/5.png" alt="Minecraft Clock">
+              <br>
+              <label id="progressLableMoon" style="display: none;"><span id="progressLableNumberMoon">00</span> out of 8</label>
+              <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" id="progressBarMoon" style="width: 0%"></div>
+              </div>
+              <div class="alert alert-success mt-4" id="alertSuccessMoon" role="alert" style="width: 50%; margin-left: 25%; display: none;">
+                All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+              </div>
+              <button type="button" id="startMoon" class="btn btn-primary mt-3">Start Caching</button>
+            </div>
+            <div class="col-sm">
+              <h3 class="mt-2">Animation testing</h3>
+              <p class="mt-2">Here you can test how smooth the animation is</p>
+              <img id="moonImageAnimation" style="margin-bottom: 10px;" src="assets/moon/5.png" alt="Minecraft Clock">
+              <br>
+              <button type="button" id="playButtonMoon" class="btn btn-primary mt-3">Play animation</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -139,6 +175,53 @@
             //updateBar(0)
             alertSuccess.style.display = "block";
             //progressLable.style.display = "none";
+          }
+        };
+        updateFrame(); // Start the frame update
+      });
+
+    })
+  </script>
+
+  <script>
+    const imageMoon = document.getElementById('moonImage');
+    const buttonMoon = document.getElementById('startMoon');
+    const progressBarMoon = document.getElementById('progressBarMoon');
+    const alertSuccessMoon = document.getElementById('alertSuccessMoon');
+    const progressLableMoon = document.getElementById('progressLableMoon');
+    const progressLableNumberMoon = document.getElementById('progressLableNumberMoon');
+
+    window.addEventListener('load', () => {
+      image.style.opacity = 1;
+
+      buttonMoon.addEventListener('click', () => {
+        // Disable the button to prevent multiple clicks
+        buttonMoon.disabled = true;
+        alertSuccessMoon.style.display = "none"
+        let i = 0;
+
+        function updateBar(currentFrame) {
+          const mappedValue = (currentFrame / 8) * 100;
+          progressBarMoon.style.width = `${mappedValue}%`;
+        }
+
+        const updateFrame = () => {
+          if (i < 8) {
+            //const frameStr = String(i).padStart(2, '0');
+            imageMoon.src = `assets/moon/${i + 1}.png`;
+            i++;
+            // Pause for 10 ms
+            updateBar(i);
+            progressLableMoon.style.display = "block";
+            progressLableNumberMoon.innerText = i;
+            setTimeout(updateFrame, 400);
+          } else {
+            // Re-enable the button after the loop
+            buttonMoon.disabled = false;
+            //updateBar(0)
+            alertSuccessMoon.style.display = "block";
+            //progressLable.style.display = "none";
+            imageMoon.src = `assets/moon/${5}.png`;
           }
         };
         updateFrame(); // Start the frame update
@@ -245,6 +328,50 @@
       });
     });
   </script>
+
+    <script>
+    window.addEventListener('load', () => {
+      const imageMoon = document.getElementById('moonImageAnimation');
+      const buttonMoon = document.getElementById('playButtonMoon');
+      imageMoon.style.opacity = 1;
+
+
+      buttonMoon.addEventListener('click', () => {
+
+        function animateToFrame(targetFrame) {
+          const totalSteps = targetFrame; // steps = how many frames to animate through
+          const duration = 2000; // total animation time in ms (you can tweak this)
+          const startTime = performance.now();
+
+          function easeOutBack(x) {
+            const c1 = 1.70158;
+            const c3 = c1 + 1;
+
+            return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+          }
+
+          function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const t = Math.min(elapsed / duration, 1); // progress 0 to 1
+            const easedT = easeOutBack(t);
+            let currentFrame = Math.floor(easedT * totalSteps);
+            if(currentFrame == 0) currentFrame = 1
+            imageMoon.src = `assets/moon/${currentFrame}.png`;
+            if (t < 1) {
+              requestAnimationFrame(animate);
+            }
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        // Start animation to current time
+        const targetFrame = 8
+        animateToFrame(targetFrame);
+      });
+    });
+  </script>
+
 
   <script>
     window.onload = () => {
