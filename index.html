@@ -13,6 +13,13 @@
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
+    #moonImage {
+      image-rendering: pixelated;
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+      width: 15vw;
+
+    }
   </style>
   <style>
     @font-face {
@@ -72,7 +79,7 @@
       </div>
       <div class="col">
         <h3 class="mt-5">Today's Moon Phase</h3>
-        <img src="moon/1.png" alt="" id="moonImage" style="width: 15vw; margin-bottom: 10px">
+        <img src="moon/1.png" alt="" id="moonImage" style="margin-bottom: 10px">
         <div id="moonPhaseName" style="font-size: xx-large;">Full Moon</div>
         <div id="todaysDate" style="font-size: x-large;"></div>
       </div>
@@ -228,6 +235,7 @@
 
 
     window.addEventListener('load', () => {
+      document.getElementById("moonImage").style.opacity = 1;
       updateMoonPhase()
       setInterval(() => this.updateMoonPhase(), 1000 * 60 * 60);
     })
