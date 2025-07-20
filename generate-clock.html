@@ -92,6 +92,10 @@
           <br>
           <img id="moonImage" src="moon/5.png" class="mt-4">
           <div id="moonPhaseName" style="font-size: xx-large;" class="mt-2">Full Moon</div>
+          <div id="funFactAlert" class="alert alert-info mt-2" style="text-align: left; opacity: 0;" role="alert">
+            <p style="font-size: x-large;">Fun fact about <span id="funFactDate">19 july</span>:</p>
+            <p class="mt-3" id="funFactText">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam perspiciatis, similique modi, alias neque illo est ea autem quisquam quam nobis, possimus in sit quae laudantium! Blanditiis numquam quia id?</p>
+          </div>
         </div>
       </div>
     </div>
@@ -167,9 +171,36 @@
       animateMoonToFrame(phaseNumber)
     }
 
-    generateButtonMoon.addEventListener('click', () => {
+    async function getFunFact(dateString) {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return false;
+      }
+      try {
+        const res = await fetch(`http://numbersapi.com/${date.getMonth() + 1}/${date.getDate()}`)
+        if (!res.ok) return false;
+        const text = await res.text();
+        const dateString = `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}`;
+        return {
+          dateString: dateString,
+          text: text
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+
+    generateButtonMoon.addEventListener('click', async () => {
       const phase = getCustomMoonPhase(dateInput.value);
       updateCustomMoonPhase(phase)
+
+      //Display fun fact about entered date.
+      const funFactObj = await getFunFact(dateInput.value);
+      if (funFactObj) {
+        document.getElementById("funFactDate").innerText = funFactObj.dateString;
+        document.getElementById("funFactText").innerText = funFactObj.text;
+        document.getElementById("funFactAlert").style.opacity = 1;
+      }
     })
   </script>
 
