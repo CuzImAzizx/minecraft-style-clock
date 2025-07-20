@@ -1,6 +1,6 @@
 # Minecraft Style Clock
 
-![An animated banner showing a digital clock synced with the Minecraft clock](banner.gif)
+![An animated banner showing a digital clock synced with the Minecraft clock](assets/banner.gif)
 
 A website that shows time, but in a Minecraft style :3
 

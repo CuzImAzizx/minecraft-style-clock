@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
-  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
+  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05s.gif">
   <style>
     #clockImage {
       opacity: 0;
@@ -21,7 +21,7 @@
   <style>
     @font-face {
       font-family: 'MinecraftRegular';
-      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+      src: url('assets/MinecraftRegular-Bmg3.otf') format('opentype');
     }
 
     body {
@@ -45,7 +45,7 @@
             <a class="nav-link" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+            <a class="nav-link" href="generate-clock.html">Generate</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
@@ -58,8 +58,8 @@
           </li>
         </ul>
         <div class="form-check form-switch ms-auto">
-          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" id="switchCheckChecked" checked>
-          <label class="form-check-label" for="switchCheckChecked">Dark Mode</label>
+          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" checked>
+          <label class="form-check-label" for="themeToggle">Dark Mode</label>
         </div>
 
       </div>
@@ -76,7 +76,7 @@
         <div class="col-sm">
           <h3 class="mt-2">Frame caching</h3>
           <p class="mt-2">Here you can start the caching process</p>
-          <img id="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img id="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <br>
           <label id="progressLable" style="display: none;"><span id="progressLableNumber">00</span> out of 64</label>
           <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
@@ -91,7 +91,7 @@
         <div class="col-sm">
           <h3 class="mt-2">Animation testing</h3>
           <p class="mt-2">Here you can test how smooth the animation is</p>
-          <img id="clockImageAnimation" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img id="clockImageAnimation" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <br>
           <button type="button" id="playButton" class="btn btn-primary mt-3">Play animation</button>
         </div>
@@ -126,7 +126,7 @@
         const updateFrame = () => {
           if (i < 64) {
             const frameStr = String(i).padStart(2, '0');
-            image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+            image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
             i++;
             // Pause for 10 ms
             updateBar(i);
@@ -228,7 +228,7 @@
                   break;
               }
             }
-            image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+            image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
 
             if (t < 1) {
               requestAnimationFrame(animate);

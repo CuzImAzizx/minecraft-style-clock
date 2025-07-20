@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
-  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
+  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05s.gif">
   <style>
     body {
       justify-content: center;
@@ -24,7 +24,7 @@
   <style>
     @font-face {
       font-family: 'MinecraftRegular';
-      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+      src: url('assets/MinecraftRegular-Bmg3.otf') format('opentype');
     }
 
     body {
@@ -47,7 +47,7 @@
             <a class="nav-link" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+            <a class="nav-link" href="generate-clock.html">Generate</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="full-screen.html">Full Screen Mode</a>
@@ -60,8 +60,8 @@
           </li>
         </ul>
         <div class="form-check form-switch ms-auto">
-          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" id="switchCheckChecked" checked>
-          <label class="form-check-label" for="switchCheckChecked">Dark Mode</label>
+          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" checked>
+          <label class="form-check-label" for="themeToggle">Dark Mode</label>
         </div>
 
       </div>
@@ -69,7 +69,7 @@
   </nav>
 
   <div class="container text-center clocks">
-    <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+    <img id="clockImage" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
   </div>
 
   <script>
@@ -127,7 +127,7 @@
           const currentFrame = Math.floor(easedT * totalSteps);
 
           const frameStr = String(currentFrame).padStart(2, '0');
-          image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+          image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
 
           if (t < 1) {
             requestAnimationFrame(animate);
@@ -140,7 +140,7 @@
       function updateClockFrame() {
         const frame = getCurrentFrame();
         const frameStr = String(frame).padStart(2, '0');
-        image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+        image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
       }
 
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
-  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
+  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05s.gif">
   <style>
     #clockImage {
       opacity: 0;
@@ -22,7 +22,7 @@
   <style>
     @font-face {
       font-family: 'MinecraftRegular';
-      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+      src: url('assets/MinecraftRegular-Bmg3.otf') format('opentype');
     }
 
     body {
@@ -46,7 +46,7 @@
             <a class="nav-link" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="generate-clock.html">Generate Clock</a>
+            <a class="nav-link active" href="generate-clock.html">Generate</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
@@ -59,8 +59,8 @@
           </li>
         </ul>
         <div class="form-check form-switch ms-auto">
-          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" id="switchCheckChecked" checked>
-          <label class="form-check-label" for="switchCheckChecked">Dark Mode</label>
+          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" checked>
+          <label class="form-check-label" for="themeToggle">Dark Mode</label>
         </div>
 
       </div>
@@ -74,7 +74,7 @@
     <div class="container text-center">
       <div class="row">
         <div class="col">
-          <h1 class="mt-5">Generate Clock</h1>
+          <h1 class="mt-5">Generate</h1>
           <p class="mt-2">You can generate a clock image from entered time</p>
           <label for="enteredTime">Enter time</label>
           <input type="time" id="enteredTime" value="12:00">
@@ -84,7 +84,7 @@
             Please enter a time to generate a clock
           </div>
           <br>
-          <img id="clockImage" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock" class="mt-4">
+          <img id="clockImage" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock" class="mt-4">
         </div>
         <div class="col">
           <h1 class="mt-5">Generate Moon</h1>
@@ -96,7 +96,7 @@
             Please enter a time to generate a moon
           </div>
           <br>
-          <img id="moonImage" src="moon/5.png" class="mt-4">
+          <img id="moonImage" src="assets/moon/5.png" class="mt-4">
           <div id="moonPhaseName" style="font-size: xx-large;" class="mt-2"></div>
 
           <div id="OTDLoading" class="card mb-4 mt-4" aria-hidden="true" style="text-align: center; display:none; justify-content: center ;align-content: center;">
@@ -179,7 +179,7 @@
         //let frameStr = String(currentFrame).padStart(2, '0');
         if (isNaN(currentFrame)) currentFrame = 1;
         if (currentFrame <= 0) currentFrame = 1;
-        moonImage.src = `moon/${currentFrame}.png`;
+        moonImage.src = `assets/moon/${currentFrame}.png`;
         const phases = [
           "New Moon",
           "Waxing Crescent",
@@ -297,7 +297,7 @@
         const targetFrame = getFrameFromTime(formattedTime);
         const frameStr = String(targetFrame).padStart(2, '0');
         timeInput.value = formattedTime;
-        image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+        image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
       }
 
       button.addEventListener('click', () => {
@@ -359,7 +359,7 @@
                   break;
               }
             }
-            image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+            image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
 
             if (t < 1) {
               requestAnimationFrame(animate);

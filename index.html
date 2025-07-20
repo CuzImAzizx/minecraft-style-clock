@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-  <link rel="icon" type="image/x-icon" href="/clock/frame_00_delay-0.05s.gif">
+  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05s.gif">
   <style>
     .clockImage {
       width: 15vw;
@@ -24,7 +24,7 @@
   <style>
     @font-face {
       font-family: 'MinecraftRegular';
-      src: url('MinecraftRegular-Bmg3.otf') format('opentype');
+      src: url('assets/MinecraftRegular-Bmg3.otf') format('opentype');
     }
 
     body {
@@ -48,7 +48,7 @@
             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="generate-clock.html">Generate Clock</a>
+            <a class="nav-link" href="generate-clock.html">Generate</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="full-screen.html">Full Screen Mode</a>
@@ -61,8 +61,8 @@
           </li>
         </ul>
         <div class="form-check form-switch ms-auto">
-          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" id="switchCheckChecked" checked>
-          <label class="form-check-label" for="switchCheckChecked">Dark Mode</label>
+          <input class="form-check-input" id="themeToggle" type="checkbox" onclick="toggleTheme()" role="switch" checked>
+          <label class="form-check-label" for="themeToggle">Dark Mode</label>
         </div>
       </div>
     </div>
@@ -73,13 +73,13 @@
       <div class="col">
         <div class="container text-center clocks">
           <h3 class="mt-5" style="margin-bottom: 10px;" id="mainClockTitle">Main Clock</h3>
-          <img class="clockImage" style="margin-bottom: 10px;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img class="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <div class="clockTime" style="font-size: xx-large;">00:00:00</div>
         </div>
       </div>
       <div class="col">
         <h3 class="mt-5">Today's Moon Phase</h3>
-        <img src="moon/1.png" alt="" id="moonImage" style="margin-bottom: 10px">
+        <img src="assets/moon/1.png" alt="" id="moonImage" style="margin-bottom: 10px">
         <div id="moonPhaseName" style="font-size: xx-large;">Full Moon</div>
         <div id="todaysDate" style="font-size: x-large;"></div>
       </div>
@@ -92,27 +92,27 @@
       <div class="col">
         <div class="container text-center clocks">
           <h5 class="mt-5" style="margin-bottom: 10px;">Europe/London</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <div class="clockTime" style="font-size: x-large;">00:00:00</div>
         </div>
       </div>
       <div class="col">
         <div class="container text-center clocks">
           <h5 class="mt-5" style="margin-bottom: 10px;">Asia/Tokyo</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <div class="clockTime" style="font-size: x-large;">00:00:00</div>
         </div>
       </div>
       <div class="col">
         <div class="container text-center clocks">
           <h5 class="mt-5" style="margin-bottom: 10px;">America/New_York</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
           <div class="clockTime" style="font-size: x-large;">00:00:00</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container text-center clocks mt-5" style="width: 50%;">
+  <div class="container text-center clocks mt-5 mb-5" style="width: 50%;">
     <div class="card">
       <div class="card-body">
         <h2 class="mt-2 text-center">Controls</h2>
@@ -195,7 +195,7 @@
         "Third Quarter",
         "Waning Crescent"
       ];
-      //const moonImage = `moon/${phaseNumber}.png`;
+      //const moonImage = `assets/moon/${phaseNumber}.png`;
       //document.getElementById('moonImage').src = moonImage;
       animateMoonToFrame(phaseNumber)
       const now = new Date();
@@ -223,7 +223,7 @@
         //let frameStr = String(currentFrame).padStart(2, '0');
         if (isNaN(currentFrame)) currentFrame = 1;
         if (currentFrame <= 0) currentFrame = 1;
-        document.getElementById('moonImage').src = `moon/${currentFrame}.png`;
+        document.getElementById('moonImage').src = `assets/moon/${currentFrame}.png`;
 
         if (t < 1) {
           requestAnimationFrame(animate);
@@ -322,7 +322,7 @@
                 break;
             }
           }
-          this.image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+          this.image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
 
           if (t < 1) {
             requestAnimationFrame(animate);
@@ -339,7 +339,7 @@
         const date = new Date(now);
         const frame = this.getCurrentFrame(date);
         const frameStr = String(frame).padStart(2, '0');
-        this.image.src = `clock/frame_${frameStr}_delay-0.05s.gif`;
+        this.image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
       }
 
       updateDigitalClock() {
