@@ -10,12 +10,12 @@
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
-      #moonImage {
+
+    #moonImage {
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
     }
-
   </style>
   <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -29,6 +29,7 @@
       font-family: 'MinecraftRegular', sans-serif;
     }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -100,7 +101,7 @@
           <div id="moonPhaseName" style="font-size: xx-large;" class="mt-2"></div>
 
           <div id="OTDLoading" class="card mb-4 mt-4" aria-hidden="true" style="text-align: center; display:none; justify-content: center ;align-content: center;">
-            <h2 class="mt-4">Born on this day</h2>
+            <h2 class="mt-4">Born on <span id="OTDDateStringLoading">July 19</span></h2>
             <img src="assets/placeholder.png" class="card-img-top" alt="..." style="width: 250px;">
             <div class="card-body">
               <h5 class="card-title placeholder-glow">
@@ -119,7 +120,12 @@
 
 
           <div id="OTDAlert" class="card mb-4 mt-4" style="text-align: center; display:none; justify-content: center ;align-content: center;">
-            <h2 class="mt-4">Born on this day</h2>
+            <!-- Start of Refresh button -->
+            <div style="font-size: xx-large; position: absolute; left:92%">
+              <i class="fa fa-refresh mt-3" aria-hidden="true" style="cursor: pointer;" onclick="OTDRefresh()"></i>
+            </div>
+            <!-- End of Refresh button -->
+            <h2 class="mt-4">Born on <span id="OTDDateString">July 19</span></h2>
 
             <img id="OTDThumbnail" src="/assets/placeholder.png" class="card-img-top mt-2" alt="..." style="width: 250px;">
 
@@ -129,8 +135,6 @@
               <a id="OTDPage" href="" target="_blank" class="btn btn-primary">Read More</a>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -206,7 +210,7 @@
       animateMoonToFrame(phaseNumber)
     }
 
-    async function getOTD(dateString) {
+    async function getOTDs(dateString) {
       const date = new Date(dateString);
       if (isNaN(date.getTime())) {
         return false;
@@ -218,36 +222,55 @@
         const jsonString = await res.text();
         const jsonObj = await JSON.parse(jsonString)
 
-        const randomIndex = Math.floor(Math.random() * (jsonObj.births.length - 1));
-        const person = jsonObj.births[randomIndex];
-
-        //"text": "Kim So-hye, South Korean actress and singer",
-        const personName = `${person.text}`.split(",")[0]
-        const personDescription = `${person.text}`.split(",")[1]
-
-        const wikiPage = person.pages[0].content_urls.desktop.page
-        const thumbnail = person.pages[0].thumbnail.source
-
-        return {
-          personName,
-          personDescription,
-          wikiPage,
-          thumbnail
-        }
+        return jsonObj;
       } catch (error) {
         return false;
       }
     }
+
+    function getRandomOTD(OTDObject) {
+      const randomIndex = Math.floor(Math.random() * (OTDObject.births.length - 1));
+      const person = OTDObject.births[randomIndex];
+
+      //"text": "Kim So-hye, South Korean actress and singer",
+      const personName = `${person.text}`.split(",")[0]
+      const personDescription = `${person.text}`.split(",")[1]
+
+      const wikiPage = person.pages[0].content_urls.desktop.page
+      const thumbnail = person.pages[0].thumbnail?.source || 'assets/placeholder.png';
+
+      return {
+        personName,
+        personDescription,
+        wikiPage,
+        thumbnail
+      }
+
+    }
+
+    function dateToString(dateString) {
+      const dateObj = new Date(dateString);
+      const fullMonthName = dateObj.toLocaleString('default', {
+        month: 'long'
+      });
+      return `${fullMonthName} ${dateObj.getDate()}`;
+    }
+
+    let OTDObjs = null;
 
     generateButtonMoon.addEventListener('click', async () => {
       const phase = getCustomMoonPhase(dateInput.value);
       updateCustomMoonPhase(phase)
       //Display fun fact about entered date.
       document.getElementById("OTDAlert").style.display = "none";
+      const dateString = dateToString(dateInput.value)
+      document.getElementById("OTDDateStringLoading").innerText = dateString;
+      document.getElementById("OTDDateString").innerText = dateString;
       document.getElementById("OTDLoading").style.display = "block";
 
-      const OTDObj = await getOTD(dateInput.value);
-      
+      OTDObjs = await getOTDs(dateInput.value);
+      let OTDObj = await getRandomOTD(OTDObjs);
+
       document.getElementById("OTDLoading").style.display = "none";
       if (OTDObj) {
         document.getElementById("OTDAlert").style.display = "block";
@@ -257,7 +280,18 @@
         document.getElementById("OTDThumbnail").src = OTDObj.thumbnail;
         document.getElementById("OTDAlert").style.opacity = 1;
       }
-    })
+    });
+
+    async function OTDRefresh() {
+      // OTDObj is global, always exists, and updated, just display another random person.
+      let OTDObj = await getRandomOTD(OTDObjs);
+      document.getElementById("OTDAlert").style.display = "block";
+      document.getElementById("OTDName").innerText = OTDObj.personName;
+      document.getElementById("OTDDescription").innerText = OTDObj.personDescription;
+      document.getElementById("OTDPage").href = OTDObj.wikiPage;
+      document.getElementById("OTDThumbnail").src = OTDObj.thumbnail;
+      document.getElementById("OTDAlert").style.opacity = 1;
+    }
 
     window.addEventListener('load', () => {
       moonImage.style.opacity = 1
