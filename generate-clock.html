@@ -75,7 +75,7 @@
     <div class="container text-center">
       <div class="row">
         <div class="col">
-          <h1 class="mt-5">Generate</h1>
+          <h1 class="mt-5">Generate Clock</h1>
           <p class="mt-2">You can generate a clock image from entered time</p>
           <label for="enteredTime">Enter time</label>
           <input type="time" id="enteredTime" value="12:00">
@@ -295,6 +295,8 @@
 
     window.addEventListener('load', () => {
       moonImage.style.opacity = 1
+      // Update date
+      document.getElementById("enteredDate").valueAsDate = new Date();
     })
   </script>
 
