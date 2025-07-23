@@ -32,6 +32,36 @@
       font-family: 'MinecraftRegular', sans-serif;
     }
   </style>
+  <style>
+    .torch-toggle {
+      display: none;
+    }
+
+    .torch-label {
+      display: inline-block;
+      width: 180px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    /* OFF by default */
+    #hoursCheck+label,
+    #minutesCheck+label,
+    #secondsCheck+label {
+      background-image: url('assets/off-redstone-torch.png');
+      opacity: 0.7;
+    }
+
+    /* ON when checked */
+    #hoursCheck:checked+label,
+    #minutesCheck:checked+label,
+    #secondsCheck:checked+label {
+      background-image: url('assets/on-redstone-torch.png');
+      opacity: 1;
+    }
+  </style>
   <link rel="stylesheet" href="redstone-lamp.css">
   <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 </head>
@@ -143,30 +173,25 @@
             </div>
             <div class="col">
               <h5>Clock System</h5>
-              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
-                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="hoursCheck" checked>
-                <label class="form-check-label" for="hoursCheck">
-                  Show Hours
-                </label>
+              <div class="form-check" style="display: flex; justify-content: center; align-items: center;">
+                <input type="checkbox" class="torch-toggle" id="hoursCheck" checked>
+                <label class="torch-label" for="hoursCheck" title="Show Hours">Show Hours</label>
               </div>
-              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
-                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="minutesCheck" checked>
-                <label class="form-check-label" for="minutesCheck">
-                  Show Minutes
-                </label>
+              <div class="form-check" style="display: flex; justify-content: center; align-items: center;">
+                <input type="checkbox" class="torch-toggle" id="minutesCheck" checked>
+                <label class="torch-label" for="minutesCheck" title="Show Minutes">Show Minutes</label>
               </div>
-              <div class="form-check" style="display: flex; justify-content: center; width: 100%;">
-                <input class="form-check-input" style="margin-right: 10px;" type="checkbox" value="" id="secondsCheck" checked>
-                <label class="form-check-label" for="secondsCheck">
-                  Show Seconds
-                </label>
+              <div class="form-check" style="display: flex; justify-content: center; align-items: center;">
+                <input type="checkbox" class="torch-toggle" id="secondsCheck" checked>
+                <label class="torch-label" for="secondsCheck" title="Show Seconds">Show Seconds</label>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  </div>
 
   </div>
 
@@ -366,11 +391,11 @@
         const time = formatDynamicTime(h, m, s, showHours.checked, showMinutes.checked, showSeconds.checked);
 
         if (radio24hours.checked) {
-          this.timeText.innerText = time;
+          this.timeText.innerHTML = time;
         } else {
           const newTime = convert24To12Hour(`${h}:${m}:${s}`)
           const filteredTime = format12HourTimeDisplay(newTime, showHours.checked, showMinutes.checked, showSeconds.checked)
-          this.timeText.innerText = filteredTime;
+          this.timeText.innerHTML = filteredTime;
         }
       }
 
@@ -471,6 +496,8 @@
         result += ` ${ampm}`; // Add a space before AM/PM
       }
 
+      if (result == "") result = "&nbsp";
+
       return result;
     }
 
@@ -514,6 +541,7 @@
         formattedTime = ""; // Or return ampm if you prefer ("AM", "PM")
       }
 
+      if (formattedTime == "") formattedTime = "&nbsp";
 
       return formattedTime;
     }
