@@ -29,7 +29,7 @@
       font-family: 'MinecraftRegular', sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="redstone-lamp.css">
+  <link rel="stylesheet" href="assets/redstone-lamp.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     .tooltip-container {
@@ -167,7 +167,7 @@
           <img id="moonImage" src="assets/moon/5.png" class="mt-4">
           <div id="moonPhaseName" style="font-size: xx-large;" class="mt-2"></div>
 
-          <div id="OTDLoading" class="card mb-4 mt-4" aria-hidden="true" style="text-align: center; display:none; justify-content: center ;align-content: center;">
+          <div id="OTDLoading" class="card mb-4 mt-4" aria-hidden="true" style="text-align: center; display:none; justify-content: center ;align-content: center; background-color: transparent;">
             <h2 class="mt-4">Born on <span id="OTDDateStringLoading">July 19</span></h2>
             <img src="assets/placeholder.png" class="card-img-top" alt="..." style="width: 250px;">
             <div class="card-body">
@@ -186,7 +186,7 @@
           </div>
 
 
-          <div id="OTDAlert" class="card mb-4 mt-4" style="text-align: center; display:none; justify-content: center ;align-content: center;">
+          <div id="OTDAlert" class="card mb-4 mt-4" style="text-align: center; display:none; justify-content: center ;align-content: center; background-color: transparent;">
             <!-- Start of Refresh button -->
             <div style="font-size: xx-large; position: absolute; left:92%">
               <div class="tooltip-container">
@@ -489,28 +489,7 @@
       });
     });
   </script>
-  <script>
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('bsTheme') || 'dark';
-      document.documentElement.setAttribute('data-bs-theme', savedTheme);
-      const themeToggle = document.getElementById('themeToggle');
-      //themeToggle.checked = false;
-      if (savedTheme == "dark") {
-        themeToggle.checked = true
-      } else {
-        themeToggle.checked = false
-      }
-    };
-
-    // Save theme to localStorage on toggle
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-bs-theme', newTheme);
-      localStorage.setItem('bsTheme', newTheme);
-    }
-  </script>
-
+  <script src="assets/theme-toggler.js"></script>
 </body>
 
 </html>

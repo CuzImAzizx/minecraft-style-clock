@@ -31,7 +31,7 @@
       font-family: 'MinecraftRegular', sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="redstone-lamp.css">
+  <link rel="stylesheet" href="assets/redstone-lamp.css">
 
 </head>
 
@@ -78,27 +78,7 @@
     <img id="clockImage" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
   </div>
 
-  <script>
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('bsTheme') || 'dark';
-      document.documentElement.setAttribute('data-bs-theme', savedTheme);
-      const themeToggle = document.getElementById('themeToggle');
-      //themeToggle.checked = false;
-      if (savedTheme == "dark") {
-        themeToggle.checked = true
-      } else {
-        themeToggle.checked = false
-      }
-    };
-
-    // Save theme to localStorage on toggle
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-bs-theme', newTheme);
-      localStorage.setItem('bsTheme', newTheme);
-    }
-  </script>
+  <script src="assets/theme-toggler.js"></script>
 
   <script>
     window.addEventListener('load', function() {

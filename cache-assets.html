@@ -28,7 +28,7 @@
       font-family: 'MinecraftRegular', sans-serif;
     }
   </style>
-  <link rel="stylesheet" href="redstone-lamp.css">
+  <link rel="stylesheet" href="assets/redstone-lamp.css">
 
 </head>
 
@@ -75,7 +75,7 @@
   <div class="container text-center clocks">
     <h1 class="mt-5">Cache Assets</h1>
     <p class="mt-2">To ensure smooth animation, all frames should be cached.<br>This will display all frames at once so your browser can cache them and ensures smooth animation</p>
-    <div class="card mt-4 mb-4">
+    <div class="card mt-4 mb-4" style="background-color: transparent">
       <div class="card-body">
         <div class="container">
           <div class="row">
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <div class="card mt-4 mb-4">
+    <div class="card mt-4 mb-4" style="background-color: transparent">
       <div class="card-body">
         <div class="container">
           <div class="row">
@@ -378,27 +378,7 @@
   </script>
 
 
-  <script>
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('bsTheme') || 'dark';
-      document.documentElement.setAttribute('data-bs-theme', savedTheme);
-      const themeToggle = document.getElementById('themeToggle');
-      //themeToggle.checked = false;
-      if (savedTheme == "dark") {
-        themeToggle.checked = true
-      } else {
-        themeToggle.checked = false
-      }
-    };
-
-    // Save theme to localStorage on toggle
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-bs-theme', newTheme);
-      localStorage.setItem('bsTheme', newTheme);
-    }
-  </script>
+  <script src="assets/theme-toggler.js"></script>
 
 </body>
 
