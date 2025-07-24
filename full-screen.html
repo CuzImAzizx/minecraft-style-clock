@@ -127,6 +127,17 @@
         const frame = getCurrentFrame();
         const frameStr = String(frame).padStart(2, '0');
         image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
+
+        const now = new Date();
+        const currentHour = now.getHours(); // 6 - 18 light, 19 - 5 dark
+        const matchingTheme = (currentHour >= 19 || currentHour <= 5);
+        
+        const themeToggle = document.getElementById('themeToggle'); 
+        const currentTheme = themeToggle.checked; //false for light, true for dark.
+        if(matchingTheme != currentTheme){
+          themeToggle.checked = matchingTheme
+          toggleTheme();
+        }
       }
 
 
