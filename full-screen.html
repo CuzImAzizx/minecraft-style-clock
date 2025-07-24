@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Minecraft Clock</title>
-  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05s.gif">
+  <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05.png">
   <style>
     body {
       justify-content: center;
@@ -75,7 +75,7 @@
   </nav>
 
   <div class="container text-center clocks">
-    <img id="clockImage" src="assets/clock/frame_00_delay-0.05s.gif" alt="Minecraft Clock">
+    <img id="clockImage" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
   </div>
 
   <script src="assets/theme-toggler.js"></script>
@@ -113,7 +113,7 @@
           const currentFrame = Math.floor(easedT * totalSteps);
 
           const frameStr = String(currentFrame).padStart(2, '0');
-          image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
+          image.src = `assets/clock/frame_${frameStr}_delay-0.05.png`;
 
           if (t < 1) {
             requestAnimationFrame(animate);
@@ -126,7 +126,7 @@
       function updateClockFrame() {
         const frame = getCurrentFrame();
         const frameStr = String(frame).padStart(2, '0');
-        image.src = `assets/clock/frame_${frameStr}_delay-0.05s.gif`;
+        image.src = `assets/clock/frame_${frameStr}_delay-0.05.png`;
 
         const now = new Date();
         const currentHour = now.getHours(); // 6 - 18 light, 19 - 5 dark
