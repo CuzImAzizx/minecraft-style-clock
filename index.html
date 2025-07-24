@@ -8,7 +8,7 @@
   <link rel="icon" type="image/x-icon" href="/assets/clock/frame_00_delay-0.05.png">
   <style>
     .clockImage {
-      width: 15vw;
+      width: 12vw;
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
@@ -18,7 +18,7 @@
       image-rendering: pixelated;
       opacity: 0;
       transition: opacity 300ms ease-in-out;
-      width: 15vw;
+      width: 12vw;
 
     }
   </style>
@@ -106,46 +106,61 @@
   </nav>
   <!-- END NAV -->
   <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <div class="container text-center clocks">
-          <h3 class="mt-5" style="margin-bottom: 10px;" id="mainClockTitle">Main Clock</h3>
-          <img class="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
-          <div class="clockTime" style="font-size: xx-large;">00:00:00</div>
+    <h1 class="mt-4">Minecraft Clock</h1>
+    <h4>A website that displays time, as a Minecraft clock :3</h4>
+    <div class="card" style="background-color: transparent;">
+      <div class="card-body">
+        <div class="row">
+          <h2>Main Clock</h2>
+          <p>This section is for your timezone</p>
+          <div class="col">
+            <div class="container text-center clocks">
+              <h3 class="mt-4" style="margin-bottom: 10px;" id="mainClockTitle">Main Clock</h3>
+              <img class="clockImage" style="margin-bottom: 10px;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
+              <div class="clockTime" style="font-size: xx-large;">00:00:00</div>
+            </div>
+          </div>
+          <div class="col">
+            <h3 class="mt-4">Today's Moon Phase</h3>
+            <img src="assets/moon/1.png" alt="" id="moonImage" style="margin-bottom: 10px">
+            <div id="moonPhaseName" style="font-size: xx-large;">Full Moon</div>
+            <div id="todaysDate" style="font-size: x-large;"></div>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <h3 class="mt-5">Today's Moon Phase</h3>
-        <img src="assets/moon/1.png" alt="" id="moonImage" style="margin-bottom: 10px">
-        <div id="moonPhaseName" style="font-size: xx-large;">Full Moon</div>
-        <div id="todaysDate" style="font-size: x-large;"></div>
       </div>
     </div>
+
   </div>
   <br>
-  <hr>
   <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <div class="container text-center clocks">
-          <h5 class="mt-5" style="margin-bottom: 10px;">Europe/London</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
-          <div class="clockTime" style="font-size: x-large;">00:00:00</div>
+    <div class="card" style="background-color: transparent;">
+      <div class="card-body">
+        <div class="row">
+          <h2>Other timezones</h2>
+          <p>This section displays the time at other timezones</p>
+          <div class="col">
+            <div class="container text-center clocks">
+              <h5 class="mt-4" style="margin-bottom: 10px;">Europe/London</h5>
+              <img class="clockImage" style="margin-bottom: 10px; width: 8vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
+              <div class="clockTime" style="font-size: x-large;">00:00:00</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="container text-center clocks">
+              <h5 class="mt-4" style="margin-bottom: 10px;">Asia/Tokyo</h5>
+              <img class="clockImage" style="margin-bottom: 10px; width: 8vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
+              <div class="clockTime" style="font-size: x-large;">00:00:00</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="container text-center clocks">
+              <h5 class="mt-4" style="margin-bottom: 10px;">America/New_York</h5>
+              <img class="clockImage" style="margin-bottom: 10px; width: 8vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
+              <div class="clockTime" style="font-size: x-large;">00:00:00</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="container text-center clocks">
-          <h5 class="mt-5" style="margin-bottom: 10px;">Asia/Tokyo</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
-          <div class="clockTime" style="font-size: x-large;">00:00:00</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="container text-center clocks">
-          <h5 class="mt-5" style="margin-bottom: 10px;">America/New_York</h5>
-          <img class="clockImage" style="margin-bottom: 10px; width: 10vw;" src="assets/clock/frame_00_delay-0.05.png" alt="Minecraft Clock">
-          <div class="clockTime" style="font-size: x-large;">00:00:00</div>
-        </div>
+
       </div>
     </div>
   </div>

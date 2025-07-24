@@ -61,7 +61,7 @@
         <div class="form-check form-switch ms-auto">
           <label class="form-check-label" for="themeToggle">Dark Mode</label>
           <label class="switch" for="themeToggle">
-            <input type="checkbox" id="themeToggle"  onclick="toggleTheme()" role="switch" checked>
+            <input type="checkbox" id="themeToggle" onclick="toggleTheme()" role="switch" checked>
             <span class="slider"></span>
             <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAIG/8QAIxAAAgIABQQDAAAAAAAAAAAAAQMCBAAREiExBUFRcROBsf/EABQBAQAAAAAAAAAAAAAAAAAAAAX/xAAWEQADAAAAAAAAAAAAAAAAAAAAEiL/2gAMAwEAAhEDEQA/AMBTp03dNglMVuttjqnKQ2UPOfntkOThbqVVUJ12BKnogZQZpy+Ucc8knwePWJrWqyqEHVmrTahEBqpbBoAH1n635wt3a9mjN1p8X2pw0qVEbKB/CO/c4OphSVP/2Q==" class="off">
             <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="on">
@@ -90,8 +90,18 @@
               <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar" id="progressBar" style="width: 0%"></div>
               </div>
-              <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="width: 50%; margin-left: 25%; display: none;">
-                All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+              <div class="alert alert-info mt-4" role="alert" id="slowMessage" style="display: none;">
+                This isn't slow because of your internet, there's exactly 300ms between each frame.
+              </div>
+              <div class="alert alert-info mt-4" role="alert" id="slowMessage2" style="display: none;">
+                Hang in there, only half the frames are left...
+              </div>
+              <div class="alert alert-info mt-4" role="alert" id="slowMessage3" style="display: none;">
+                The Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.
+              </div>
+
+              <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="display: none;">
+                All frames <b>should</b> be cached by now<br><i>I said should cuz sometimes it doesn't work</i>
               </div>
               <button type="button" id="start" class="btn btn-primary mt-3">Start Caching</button>
             </div>
@@ -122,8 +132,8 @@
               <div class="progress mt-2" style="width: 25%; margin-left: 37%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar" id="progressBarMoon" style="width: 0%"></div>
               </div>
-              <div class="alert alert-success mt-4" id="alertSuccessMoon" role="alert" style="width: 50%; margin-left: 25%; display: none;">
-                All frames now <b>should</b> be cached<br><i>I said should cuz sometimes it doesn't work</i>
+              <div class="alert alert-success mt-4" id="alertSuccessMoon" role="alert" style="display: none;">
+                All frames <b>should</b> be cached by now<br><i>I said should cuz sometimes it doesn't work</i>
               </div>
               <button type="button" id="startMoon" class="btn btn-primary mt-3">Start Caching</button>
             </div>
@@ -173,11 +183,21 @@
             updateBar(i);
             progressLable.style.display = "block";
             progressLableNumber.innerText = i;
+            if (i == 13) document.getElementById("slowMessage").style.display = "block"
+            if (i == 31) {
+              document.getElementById("slowMessage").style.display = "none"
+              document.getElementById("slowMessage2").style.display = "block"
+            }
+            if (i == 47) {
+              document.getElementById("slowMessage2").style.display = "none"
+              document.getElementById("slowMessage3").style.display = "block"
+            }
             setTimeout(updateFrame, 300);
           } else {
             // Re-enable the button after the loop
             button.disabled = false;
             //updateBar(0)
+            document.getElementById("slowMessage3").style.display = "none"
             alertSuccess.style.display = "block";
             //progressLable.style.display = "none";
           }
@@ -334,7 +354,7 @@
     });
   </script>
 
-    <script>
+  <script>
     window.addEventListener('load', () => {
       const imageMoon = document.getElementById('moonImageAnimation');
       const buttonMoon = document.getElementById('playButtonMoon');
@@ -360,7 +380,7 @@
             const t = Math.min(elapsed / duration, 1); // progress 0 to 1
             const easedT = easeOutBack(t);
             let currentFrame = Math.floor(easedT * totalSteps);
-            if(currentFrame == 0) currentFrame = 1
+            if (currentFrame == 0) currentFrame = 1
             imageMoon.src = `assets/moon/${currentFrame}.png`;
             if (t < 1) {
               requestAnimationFrame(animate);
