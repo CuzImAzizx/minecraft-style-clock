@@ -29,4 +29,13 @@ Until it became a fun little website.
 
 This is a pure frontend project that displays a Minecraft-style clock synced with real time.  
 
-No frameworks, no libraries, just pure **HTML**, embedded **JavaScript**, and **CSS**.
+No frameworks, no libraries, just pure **HTML**, embedded **JavaScript**, and **CSS**. And Bootstrap, if you count that.
+
+## Screenshots
+
+![alt text](assets/screenshot1.png)
+
+![alt text](assets/screenshot2.png)
+
+![alt text](assets/screenshot3.png)
+
