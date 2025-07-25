@@ -28,6 +28,13 @@
     body {
       font-family: 'MinecraftRegular', sans-serif;
     }
+    .fixed-image {
+    width: 15vw;
+    height: 15vw; 
+    object-fit: cover; 
+    object-position: center;
+    border: 1px solid #ddd; 
+  }
   </style>
   <link rel="stylesheet" href="assets/redstone-lamp.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -176,7 +183,7 @@
           </div>
           <div id="OTDLoading" class="card mb-4 mt-4" aria-hidden="true" style="text-align: center; display:none; justify-content: center ;align-content: center; background-color: transparent;">
             <h2 class="mt-4">Born on <span id="OTDDateStringLoading">July 19</span></h2>
-            <img src="assets/placeholder.png" class="card-img-top" alt="..." style="width: 250px;">
+            <img src="assets/placeholder.png" class="card-img-top fixed-image" alt="..." style="width: 250px;">
             <div class="card-body">
               <h5 class="card-title placeholder-glow">
                 <span class="placeholder col-6"></span>
@@ -203,7 +210,7 @@
             <!-- End of Refresh button -->
             <h2 class="mt-4">Born on <span id="OTDDateString">July 19</span></h2>
 
-            <img id="OTDThumbnail" src="/assets/placeholder.png" class="card-img-top mt-2" alt="..." style="width: 250px;">
+            <img id="OTDThumbnail" class="fixed-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Richard_Bachman_10-2015.jpg/330px-Richard_Bachman_10-2015.jpg" class="card-img-top mt-2" alt="...">
 
             <div class="card-body">
               <h4 id="OTDName" class="card-title">Name</h4>
@@ -305,7 +312,7 @@
     }
 
     function getRandomOTD(OTDObject) {
-      const randomIndex = Math.floor(Math.random() * (OTDObject.births.length - 1));
+      const randomIndex = Math.floor(Math.random() * OTDObject.births.length);
       const person = OTDObject.births[randomIndex];
 
       //"text": "Kim So-hye, South Korean actress and singer",

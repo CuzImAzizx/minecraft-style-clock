@@ -97,7 +97,6 @@
                 Hang in there, only half the frames are left...
               </div>
               <div class="alert alert-info mt-4" role="alert" id="slowMessage3" style="display: none;">
-                The Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.
               </div>
 
               <div class="alert alert-success mt-4" id="alertSuccess" role="alert" style="display: none;">
@@ -183,15 +182,33 @@
             updateBar(i);
             progressLable.style.display = "block";
             progressLableNumber.innerText = i;
+
             if (i == 13) document.getElementById("slowMessage").style.display = "block"
             if (i == 31) {
               document.getElementById("slowMessage").style.display = "none"
               document.getElementById("slowMessage2").style.display = "block"
             }
             if (i == 47) {
-              document.getElementById("slowMessage2").style.display = "none"
-              document.getElementById("slowMessage3").style.display = "block"
+            const catFacts = [
+            "Cats have five toes on their front paws, but only four on their back paws.",
+            "A group of cats is called a clowder.",
+            "Cats can make over 100 different sounds.",
+            "The oldest known pet cat lived to be 38 years old.",
+            "Cats sleep for about 12 to 16 hours a day.",
+            "A cat's nose print is unique, similar to a human's fingerprint.",
+            "Domestic cats are descended from a wild ancestor called the African wildcat.",
+            "Cats can rotate their ears 180 degrees.",
+            "The world's largest cat measured over 48 inches long.",
+            "The Industrial Revolution and its consequences have been a disaster for the human race. They have greatly increased the life-expectancy of those of us who live in “advanced” countries, but they have destabilized society, have made life unfulfilling, have subjected human beings to indignities, have led to widespread psychological suffering (in the Third World to physical suffering as well) and have inflicted severe damage on the natural world. The continued development of technology will worsen the situation. It will certainly subject human beings to greater indignities and inflict greater damage on the natural world, it will probably lead to greater social disruption and psychological suffering, and it may lead to increased physical suffering even in “advanced” countries.",
+            "Cats purr not only when they're happy but also when they're in pain or stressed.",
+            ];
+            const randomIndex = Math.floor(Math.random() * catFacts.length);
+            const randomFunFact = catFacts[randomIndex];
+            document.getElementById("slowMessage3").innerHTML = `<strong>Fun Fact:</strong><br>${randomFunFact}`;
+            document.getElementById("slowMessage2").style.display = "none";
+            document.getElementById("slowMessage3").style.display = "block";
             }
+
             setTimeout(updateFrame, 300);
           } else {
             // Re-enable the button after the loop
