@@ -201,6 +201,15 @@
                 <label class="torch-label" for="secondsCheck" title="Show Seconds">Show Seconds</label>
               </div>
             </div>
+            <div id="cookiesAlert" class="alert alert-warning mt-4" role="alert">
+              This website doesn't use cookies
+              <button class="btn btn-secondary mt-2" style="width: 100%;" onclick="hideCookieAlert()">Got it, don't show again</button>
+            </div>
+            <script>
+              function hideCookieAlert(){
+                document.getElementById("cookiesAlert").style.display = "none"
+              }
+            </script>
           </div>
         </div>
       </div>
